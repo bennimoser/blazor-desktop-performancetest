@@ -1,6 +1,7 @@
 using BDPT.WebAssembly;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using RazorClassLibrary;
 
 namespace BDPT.WebAssembly
 {
