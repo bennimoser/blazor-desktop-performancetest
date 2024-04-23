@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary", "ClassLibrar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorClassLibrary", "RazorClassLibrary\RazorClassLibrary.csproj", "{EC4C5B6D-AF24-427A-ACB3-9A193AA10D9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDPT.Hybrid", "BDPT.Hybrid\BDPT.Hybrid.csproj", "{FA332AEA-9848-4F9E-B06B-909B9DF2FC00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDPT.Hybrid", "BDPT.Hybrid\BDPT.Hybrid.csproj", "{FA332AEA-9848-4F9E-B06B-909B9DF2FC00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

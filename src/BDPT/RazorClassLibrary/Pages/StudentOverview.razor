@@ -1,12 +1,37 @@
-﻿@page "/studentoverview"
+﻿@page "/studentoverview/{Remaining:int}"
+@using ClassLibrary
+@using System.Diagnostics
 
-@foreach(var student in Students)
-{
-    <StudentCard StudentData="student"/>
-})
+<a class="btn btn-primary" href="" role="button">Zurück zum Start</a>
+<div class="container-fluid">
+    <div class="row">
+
+        @foreach (var student in Students)
+        {
+            <div class="col-3 p-2">
+                <StudentCard StudentData="student" />
+            </div>
+        }
+
+    </div>
+</div>
+
 
 @code {
+
+    [Parameter]
+    public int Remaining { get; set; }
+
+    [Inject]
+    public NavigationManager NavManager { get; set; }
+
     public List<Student> Students { get; set; } = new List<Student>();
+
+    public Stopwatch MeasurementStopWatch { get; } = new Stopwatch();
+
+    public long SortingMilliseconds { get; set; } = 0;
+
+    public long RenderingMilliseconds { get; set; } = 0;
 
     /// <summary>
     /// Method invoked when the component is ready to start, having received its
@@ -14,6 +39,15 @@
     /// </summary>
     protected override void OnInitialized()
     {
+        var students = StudentDataSet.Students;
+        MeasurementStopWatch.Start();
+        students = students.OrderBy(t => t.Age).ToList();
+        MeasurementStopWatch.Stop();
+        SortingMilliseconds = MeasurementStopWatch.ElapsedMilliseconds;
+        Console.WriteLine($"Sorting: {MeasurementStopWatch.ElapsedMilliseconds}ms");
+        MeasurementStopWatch.Reset();
+        Students = students;
+        MeasurementStopWatch.Start();
         base.OnInitialized();
     }
 
@@ -36,7 +70,20 @@
     /// </remarks>
     protected override void OnAfterRender(bool firstRender)
     {
+        if (firstRender)
+        {
+            MeasurementStopWatch.Stop();
+            RenderingMilliseconds = MeasurementStopWatch.ElapsedMilliseconds;
+            Console.WriteLine($"Rendering: {MeasurementStopWatch.ElapsedMilliseconds}ms");
+            MeasurementDataSet.Measurements.Add(new()
+                {
+                    RenderingMilliseconds = RenderingMilliseconds,
+                    SortingMilliseconds = SortingMilliseconds
+                });
+            Remaining--;
+            NavManager.NavigateTo($"/measurementlandingpage/{Remaining}");
+        }
+
         base.OnAfterRender(firstRender);
     }
-
 }

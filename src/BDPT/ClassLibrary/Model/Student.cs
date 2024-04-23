@@ -14,10 +14,9 @@ namespace ClassLibrary.Model
         public string LastName { get; set; } = string.Empty;
 
         /// <summary>
-        /// Semester des Studenten
+        ///     Name des Studenten.
         /// </summary>
-        public int Semester { get; set; } = 1;
-
+        public string Name => $"{FirstName} {LastName}";
         /// <summary>
         /// Alter des Studenten
         /// </summary>

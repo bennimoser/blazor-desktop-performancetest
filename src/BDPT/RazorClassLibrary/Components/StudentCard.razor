@@ -1,9 +1,27 @@
 ﻿@if (StudentData != null!)
 {
-
+    <div class="card bg-primary-subtle shadow">
+        <div class="card-body">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="v-stack gap-1">
+                            <small>Name</small>
+                            <p class="fs-4 m-0 fw-bold">@StudentData.Name</p>
+                            <small>Alter</small>
+                            <p class="fs-4 m-0 fw-bold">@StudentData.Age</p>
+                            <small>Matrikelnummer</small>
+                            <p class="fs-4 m-0 fw-bold">@StudentData.StudentIdentificationNumber</p>
+                        </div>
+                    </div>
+                    <div class="col-5 fs-2">
+                        <img src="../profile.png" class="img-fluid rounded-circle shadow" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
-
-<h3>StudentCard</h3>
 
 @code {
     [Parameter]

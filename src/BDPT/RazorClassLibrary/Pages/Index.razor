@@ -1,6 +1,12 @@
 ﻿@page "/"
-<h3>Index</h3>
+@using ClassLibrary
+<a class="btn btn-primary" href="@($"studentoverview/{AmountMeasurements}")" role="button">Starte Messung</a>
+
+@foreach(var dataset in MeasurementDataSet.Measurements)
+{
+    <p>@($"{dataset.RenderingMilliseconds}ms - {dataset.SortingMilliseconds}ms")</p>
+}
 
 @code {
-
+    public int AmountMeasurements => 50;
 }

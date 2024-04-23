@@ -67,4 +67,10 @@
       <ProjectReference Include="..\RazorClassLibrary\RazorClassLibrary.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="wwwroot\profile.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>
