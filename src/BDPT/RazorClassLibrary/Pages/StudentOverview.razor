@@ -2,19 +2,22 @@
 @using ClassLibrary
 @using System.Diagnostics
 
-<a class="btn btn-primary" href="" role="button">Zurück zum Start</a>
-<div class="container-fluid">
-    <div class="row">
-
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Alter</th>
+            <th scope="col">Matrikelnummer</th>
+        </tr>
+    </thead>
+    <tbody>
         @foreach (var student in Students)
         {
-            <div class="col-3 p-2">
-                <StudentCard StudentData="student" />
-            </div>
+            <StudentRow StudentData="student" />
         }
-
-    </div>
-</div>
+    </tbody>
+</table>
 
 
 @code {
@@ -23,9 +26,9 @@
     public int Remaining { get; set; }
 
     [Inject]
-    public NavigationManager NavManager { get; set; }
+    public NavigationManager NavManager { get; set; } = null!;
 
-    public List<Student> Students { get; set; } = new List<Student>();
+    public IEnumerable<Student> Students { get; set; } = new List<Student>();
 
     public Stopwatch MeasurementStopWatch { get; } = new Stopwatch();
 
@@ -39,14 +42,12 @@
     /// </summary>
     protected override void OnInitialized()
     {
-        var students = StudentDataSet.Students;
         MeasurementStopWatch.Start();
-        students = students.OrderBy(t => t.Age).ToList();
+        SortingData.SortList();
         MeasurementStopWatch.Stop();
         SortingMilliseconds = MeasurementStopWatch.ElapsedMilliseconds;
-        Console.WriteLine($"Sorting: {MeasurementStopWatch.ElapsedMilliseconds}ms");
         MeasurementStopWatch.Reset();
-        Students = students;
+        Students = StudentDataSet.Students;
         MeasurementStopWatch.Start();
         base.OnInitialized();
     }
@@ -70,11 +71,11 @@
     /// </remarks>
     protected override void OnAfterRender(bool firstRender)
     {
+        base.OnAfterRender(firstRender);
         if (firstRender)
         {
             MeasurementStopWatch.Stop();
             RenderingMilliseconds = MeasurementStopWatch.ElapsedMilliseconds;
-            Console.WriteLine($"Rendering: {MeasurementStopWatch.ElapsedMilliseconds}ms");
             MeasurementDataSet.Measurements.Add(new()
                 {
                     RenderingMilliseconds = RenderingMilliseconds,
@@ -83,7 +84,5 @@
             Remaining--;
             NavManager.NavigateTo($"/measurementlandingpage/{Remaining}");
         }
-
-        base.OnAfterRender(firstRender);
     }
 }

@@ -1,0 +1,16 @@
+﻿@if (StudentData != null!)
+{
+    <tr>
+        <th scope="row">
+            <img style="max-height:50px" src="../profile.png" class="img-fluid rounded-circle shadow" />
+        </th>
+        <td>@StudentData.Name</td>
+        <td>@StudentData.Age</td>
+        <td>@StudentData.StudentIdentificationNumber</td>
+    </tr>
+}
+
+@code {
+    [Parameter]
+    public Student StudentData { get; set; } = null!;
+}
