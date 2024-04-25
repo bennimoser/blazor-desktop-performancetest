@@ -1,12 +1,19 @@
 ﻿@page "/"
 @using ClassLibrary
-<a class="btn btn-primary" href="@($"studentoverview/{AmountMeasurements}")" role="button">Starte Messung</a>
-
-@foreach(var dataset in MeasurementDataSet.Measurements)
-{
-    <p>@($"{dataset.RenderingMilliseconds}ms - {dataset.SortingMilliseconds}ms")</p>
-}
 
 @code {
+
+    [Inject]
+    public NavigationManager NavManager { get; set; }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            NavManager.NavigateTo($"studentoverview/{AmountMeasurements}");
+        }
+        base.OnAfterRender(firstRender);
+    }
+
     public int AmountMeasurements => 100;
 }

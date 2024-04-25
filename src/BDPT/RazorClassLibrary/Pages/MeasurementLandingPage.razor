@@ -1,22 +1,27 @@
 ﻿@page "/measurementlandingpage/{Remaining:int}"
 
+@if (Remaining == 0)
+{
+    @foreach(var item in MeasurementDataSet.Measurements)
+    {
+        <p>@($"{item.SortingMilliseconds};{item.RenderingMilliseconds}")</p>
+    }
+    
+}
+
 @code {
 
     [Parameter]
     public int Remaining { get; set; }
 
     [Inject]
-    public NavigationManager NavManager { get; set; }
+    public NavigationManager NavManager { get; set; } = null;
 
     protected override void OnInitialized()
     {
         if(Remaining > 0)
         {
             NavManager.NavigateTo($"/studentoverview/{Remaining}");
-        }
-        else
-        {
-            NavManager.NavigateTo("/");
         }
         base.OnInitialized();
     }

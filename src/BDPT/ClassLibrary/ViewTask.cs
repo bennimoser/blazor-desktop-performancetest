@@ -1,5 +1,4 @@
-﻿
-namespace ClassLibrary.Model
+﻿namespace ClassLibrary
 {
     public class Student
     {
@@ -26,5 +25,25 @@ namespace ClassLibrary.Model
         /// Matrikelnummer des Studenten
         /// </summary>
         public string StudentIdentificationNumber { get; set; } = string.Empty;
+    }
+
+    public static class StudentDataSet
+    {
+        public static IEnumerable<Student> Students = GetStudents();
+
+        private static IEnumerable<Student> GetStudents()
+        {
+            var random = new Random();
+            for (int i = 0; i < 500; i++)
+            {
+                yield return new Student()
+                {
+                    FirstName = "Max",
+                    LastName = $"Mustermann{i}",
+                    Age = i % 25 + 18,
+                    StudentIdentificationNumber = $"{i}{i}{i}"
+                };
+            }
+        }
     }
 }
