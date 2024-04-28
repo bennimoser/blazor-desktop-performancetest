@@ -5,12 +5,12 @@
         /// <summary>
         ///     Millisekunden zum Sortieren der Daten.
         /// </summary>
-        public long SortingMilliseconds { get; set; }
+        public double SortingMilliseconds { get; set; }
 
         /// <summary>
         ///     Millisekunden zum Rendern der Daten.
         /// </summary>
-        public long RenderingMilliseconds { get; set; }
+        public double RenderingMilliseconds { get; set; }
     }
 
     public class MeasurementDataSet

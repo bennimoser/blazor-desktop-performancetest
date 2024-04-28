@@ -32,9 +32,9 @@
 
     public Stopwatch MeasurementStopWatch { get; } = new Stopwatch();
 
-    public long SortingMilliseconds { get; set; } = 0;
+    public double SortingMilliseconds { get; set; } = 0;
 
-    public long RenderingMilliseconds { get; set; } = 0;
+    public double RenderingMilliseconds { get; set; } = 0;
 
     /// <summary>
     /// Method invoked when the component is ready to start, having received its
@@ -45,7 +45,7 @@
         MeasurementStopWatch.Start();
         SortingData.SortList();
         MeasurementStopWatch.Stop();
-        SortingMilliseconds = MeasurementStopWatch.ElapsedMilliseconds;
+        SortingMilliseconds = MeasurementStopWatch.Elapsed.TotalMilliseconds;
         MeasurementStopWatch.Reset();
         Students = StudentDataSet.Students;
         MeasurementStopWatch.Start();
