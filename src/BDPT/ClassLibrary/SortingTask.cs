@@ -6,7 +6,9 @@
 
         public static void SortList()
         {
-            Sort(UnsortedData, 0, UnsortedData.Length - 1);
+            var sortData = new int[UnsortedData.Length];
+            Array.Copy(UnsortedData,sortData, UnsortedData.Length);
+            Sort(sortData, 0, sortData.Length - 1);
         }
 
         public static void Sort(int[] arr, int left, int right)
