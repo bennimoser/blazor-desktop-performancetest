@@ -75,7 +75,7 @@
         if (firstRender)
         {
             MeasurementStopWatch.Stop();
-            RenderingMilliseconds = MeasurementStopWatch.ElapsedMilliseconds;
+            RenderingMilliseconds = MeasurementStopWatch.Elapsed.TotalMilliseconds;
             MeasurementDataSet.Measurements.Add(new()
                 {
                     RenderingMilliseconds = RenderingMilliseconds,
